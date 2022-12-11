@@ -1,5 +1,13 @@
+import { Counter } from '../../components/Counter'
 import { Intro } from '../../components/Intro'
 
 export function Home() {
-  return <Intro />
+  return (
+    <div>
+      <Intro />
+      <main>
+        <Counter />
+      </main>
+    </div>
+  )
 }

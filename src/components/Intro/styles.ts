@@ -7,7 +7,7 @@ export const IntroContainer = styled.div`
   gap: 3.5rem;
   background-image: url(${Background});
   background-repeat: no-repeat;
-  padding: 5.75rem 10rem;
+  padding: 5.75rem 0;
 
   & > div {
     display: flex;
