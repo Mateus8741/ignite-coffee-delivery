@@ -4,9 +4,10 @@ import Background from '../../assets/Background.png'
 export const IntroContainer = styled.div`
   display: flex;
   align-items: flex-start;
+  justify-content: space-between;
   gap: 3.5rem;
   background-image: url(${Background});
-  background-repeat: no-repeat;
+  background-repeat: round;
   padding: 5.75rem 0;
 
   & > div {
