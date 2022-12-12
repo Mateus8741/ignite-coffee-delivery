@@ -44,7 +44,7 @@ export const Content = styled.div`
   }
 
   & span + span {
-    gap: 2rem;
+    margin-left: 1rem;
   }
 
   h2 {
