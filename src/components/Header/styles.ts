@@ -7,6 +7,23 @@ export const HeaderContainer = styled.div`
   align-items: center;
   padding: 2rem 0;
 
+  &::after {
+    content: '3';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 150px;
+    top: 25px;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 1000px;
+    background-color: ${(props) => props.theme['yellow-dark']};
+    color: ${(props) => props.theme.white};
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+
   nav {
     display: flex;
     gap: 0.75rem;
@@ -33,4 +50,5 @@ export const Cart = styled.div`
   padding: 0.5rem;
   border-radius: 6px;
   align-items: center;
+  cursor: pointer;
 `

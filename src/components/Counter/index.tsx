@@ -3,10 +3,10 @@ import { useState } from 'react'
 import { CounterContainer } from './styles'
 
 export function Counter() {
-  const [counter, setCounter] = useState(0)
+  const [counter, setCounter] = useState(1)
 
   function Subtract() {
-    if (counter > 0) {
+    if (counter > 1) {
       return setCounter((state) => state - 1)
     }
   }
