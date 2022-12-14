@@ -6,6 +6,11 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 2rem 0;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  background-color: ${(props) => props.theme.background};
 
   &::after {
     content: '3';
@@ -13,8 +18,8 @@ export const HeaderContainer = styled.div`
     align-items: center;
     justify-content: center;
     position: absolute;
-    right: 150px;
-    top: 25px;
+    right: -8px;
+    top: 28px;
     width: 1.25rem;
     height: 1.25rem;
     border-radius: 1000px;

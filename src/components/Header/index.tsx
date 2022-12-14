@@ -7,7 +7,9 @@ import { MapPin, ShoppingCart } from 'phosphor-react'
 export function Header() {
   return (
     <HeaderContainer>
-      <img src={Logo} alt="" />
+      <NavLink to="/">
+        <img src={Logo} alt="" />
+      </NavLink>
       <nav>
         <Location>
           <MapPin size={22} weight="fill" color="#8047F8" />

@@ -3,7 +3,7 @@ import { HeroItemContainer, IconWrapper } from './styles'
 
 export type colorsType = 'yellow-dark' | 'yellow' | 'gray' | 'purple'
 interface HeroItemsProps {
-  text: string
+  text: string | ReactNode
   icon: ReactNode
   color: colorsType
 }
