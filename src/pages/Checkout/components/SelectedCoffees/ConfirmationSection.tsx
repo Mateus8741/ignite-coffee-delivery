@@ -1,4 +1,6 @@
 import { Button } from '../../../../components/Button'
+import { useCart } from '../../../../hooks/useCart'
+import { formatMoney } from '../../../../utils/formatMoney'
 import {
   ConfirmationSectionContainer,
   Price,
@@ -7,23 +9,40 @@ import {
   TotalPrice,
 } from './styles'
 
+const DELIVERY_PRICE = 3.5
+
 export function ConfirmationSection() {
+  const { cartItemsTotal, cartQuantity } = useCart()
+  const cartTotal = DELIVERY_PRICE + cartItemsTotal
+
+  const formattedItemTotal = formatMoney(cartItemsTotal)
+  const formattedCartTotal = formatMoney(cartTotal)
+  const formattedDelivery = formatMoney(DELIVERY_PRICE)
+
   return (
     <ConfirmationSectionContainer>
-      <div>
-        <TitlePrice>Total de itens</TitlePrice>
-        <Price>R$ 9,90</Price>
-      </div>
-      <div>
-        <TitlePrice>Entrega</TitlePrice>
-        <Price>R$ 3,50</Price>
-      </div>
-      <div>
-        <TitleTotal>Total</TitleTotal>
-        <TotalPrice>R$ 29,90</TotalPrice>
-      </div>
+      {cartQuantity > 0 && (
+        <>
+          <div>
+            <TitlePrice>Total de itens</TitlePrice>
+            <Price>R$ {formattedItemTotal}</Price>
+          </div>
+          <div>
+            <TitlePrice>Entrega</TitlePrice>
+            <Price>R$ {formattedDelivery}</Price>
+          </div>
+          <div>
+            <TitleTotal>Total</TitleTotal>
+            <TotalPrice>R$ {formattedCartTotal}</TotalPrice>
+          </div>
 
-      <Button text="Confirmar Pedido" />
+          <Button
+            text="Confirmar Pedido"
+            disabled={cartQuantity <= 0}
+            type="submit"
+          />
+        </>
+      )}
     </ConfirmationSectionContainer>
   )
 }

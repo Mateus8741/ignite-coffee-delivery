@@ -17,6 +17,7 @@ export const CounterContainer = styled.div`
     color: ${(props) => props.theme['purple-purple']};
     border: none;
     background: ${(props) => props.theme['base-button']};
+    cursor: pointer;
 
     &:hover {
       color: ${(props) => props.theme['purple-dark']};

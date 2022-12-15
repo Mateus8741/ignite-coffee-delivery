@@ -12,8 +12,7 @@ export const HeaderContainer = styled.div`
   z-index: 5;
   background-color: ${(props) => props.theme.background};
 
-  &::after {
-    content: '3';
+  span {
     display: flex;
     align-items: center;
     justify-content: center;

@@ -1,5 +1,8 @@
 import { Trash } from 'phosphor-react'
 import { Counter } from '../../../../components/Counter'
+import { CartItem } from '../../../../contexts/CartContext'
+import { useCart } from '../../../../hooks/useCart'
+import { formatMoney } from '../../../../utils/formatMoney'
 import {
   ActionsContainer,
   CoffeeCartCardContainer,
@@ -7,16 +10,44 @@ import {
   RemoveButton,
 } from './styles'
 
-export function CoffeeCartCard() {
+interface CoffeeCartCardProps {
+  coffee: CartItem
+}
+
+export function CoffeeCartCard({ coffee }: CoffeeCartCardProps) {
+  const { changeCartItemQuantity, removeCartItem } = useCart()
+
+  const coffeeTotal = coffee.quantity * coffee.price
+
+  const formattedPrice = formatMoney(coffeeTotal)
+
+  function handleIncrease(e: any) {
+    e.preventDefault()
+    changeCartItemQuantity(coffee.id, 'increase')
+  }
+
+  function handleDecrease(e: any) {
+    e.preventDefault()
+    changeCartItemQuantity(coffee.id, 'decrease')
+  }
+
+  function handleRemoveToCart() {
+    removeCartItem(coffee.id)
+  }
+
   return (
     <CoffeeCartCardContainer>
       <div>
-        <img src="https://github.com/Mateus8741.png" alt="" />
+        <img src={coffee.srcImg} alt={coffee.title} />
         <div>
-          <CoffeeTitle>Expresso Tradicional</CoffeeTitle>
+          <CoffeeTitle>{coffee.title}</CoffeeTitle>
           <ActionsContainer>
-            <Counter />
-            <RemoveButton>
+            <Counter
+              quantity={coffee.quantity}
+              onIncrease={handleIncrease}
+              onDecrease={handleDecrease}
+            />
+            <RemoveButton onClick={handleRemoveToCart}>
               <Trash size={16} />
               REMOVER
             </RemoveButton>
@@ -24,7 +55,7 @@ export function CoffeeCartCard() {
         </div>
       </div>
 
-      <p>R$ 9,90</p>
+      <p>R$ {formattedPrice}</p>
     </CoffeeCartCardContainer>
   )
 }

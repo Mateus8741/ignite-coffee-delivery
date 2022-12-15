@@ -8,8 +8,27 @@ import {
 import SVG from '../../assets/OrderSuccess_illustration.svg'
 import { HeroItem } from '../../components/HeroItem'
 import { Clock, CurrencyDollar, MapPin } from 'phosphor-react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { OrderData } from '../Checkout'
+import { paymentMethods } from '../Checkout/components/CompleteOrderForm/PaymentMethodOptions'
+import { useEffect } from 'react'
+
+interface LocationType {
+  state: OrderData
+}
 
 export function OrderSuccess() {
+  const { state } = useLocation() as unknown as LocationType
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!state) {
+      navigate('/')
+    }
+  }, [navigate, state])
+
+  if (!state) return <></>
   return (
     <OrderSuccessContainer>
       <div>
@@ -26,9 +45,12 @@ export function OrderSuccess() {
             color="purple"
             text={
               <SubTitle>
-                Entrega em <strong>Rua João Daniel Martinelli, 102</strong>
+                Entrega em{' '}
+                <strong>
+                  {state.street}, {state.number}
+                </strong>
                 {<br />}
-                Farrapos - Porto Alegre, RS
+                {state.district} - {state.city}, {state.uf}
               </SubTitle>
             }
           />
@@ -48,7 +70,7 @@ export function OrderSuccess() {
             text={
               <SubTitle>
                 Pagamento na entrega {<br />}
-                <strong>Cartão de Crédito</strong>
+                <strong>{paymentMethods[state.paymentMethod].label}</strong>
               </SubTitle>
             }
           />

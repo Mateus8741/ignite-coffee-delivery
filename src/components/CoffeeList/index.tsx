@@ -1,18 +1,46 @@
+import { useState } from 'react'
+import { useCart } from '../../hooks/useCart'
+import { formatMoney } from '../../utils/formatMoney'
 import { Cart } from '../Cart'
 import { Counter } from '../Counter'
 import { CardFooter, CoffeeListContainer, Content } from './styles'
 
-interface CardProps {
-  data: {
-    srcImg: string
-    tags: string[]
-    title: string
-    description: string
-    price: string
-  }
+export interface CardProps {
+  id: number
+  srcImg: string
+  tags: string[]
+  title: string
+  description: string
+  price: number
 }
 
-export function CoffeeList({ data }: CardProps) {
+interface CoffeeProps {
+  data: CardProps
+}
+
+export function CoffeeList({ data }: CoffeeProps) {
+  const { addCoffeeToCart } = useCart()
+
+  const [quantity, setQuantity] = useState(1)
+
+  function handleIncrease() {
+    setQuantity((state) => state + 1)
+  }
+
+  function handleDecrease() {
+    setQuantity((state) => state - 1)
+  }
+
+  function handleAddToCart() {
+    const coffeeToAdd = {
+      ...data,
+      quantity,
+    }
+    addCoffeeToCart(coffeeToAdd)
+  }
+
+  const Price = formatMoney(data.price)
+
   return (
     <CoffeeListContainer>
       <img src={data.srcImg} alt={data.title} />
@@ -25,10 +53,14 @@ export function CoffeeList({ data }: CardProps) {
       </Content>
       <CardFooter>
         <span>
-          R$ <strong>{data.price}</strong>
+          R$ <strong>{Price}</strong>
         </span>
-        <Counter />
-        <Cart />
+        <Counter
+          onIncrease={handleIncrease}
+          onDecrease={handleDecrease}
+          quantity={quantity}
+        />
+        <Cart onClick={handleAddToCart} />
       </CardFooter>
     </CoffeeListContainer>
   )
