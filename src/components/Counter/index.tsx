@@ -3,8 +3,8 @@ import { CounterContainer } from './styles'
 
 interface CounterProps {
   quantity: number
-  onIncrease: () => void
-  onDecrease: () => void
+  onIncrease: (e: any) => void
+  onDecrease: (e: any) => void
 }
 
 export function Counter({ quantity, onIncrease, onDecrease }: CounterProps) {
